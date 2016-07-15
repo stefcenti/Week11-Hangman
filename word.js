@@ -1,4 +1,4 @@
-var let = require('./letter.js');
+var letter = require('./letter.js');
 
 //Given a word to guess, this will initialize
 // the current word and the word to be displayed
@@ -8,7 +8,7 @@ function word(currentWord) {
 	this.displayedWord = new Array(currentWord.length); // something like '_ _ A _ _ L _'
 
 	for (var i = 0; i < currentWord.length; i++){
-		this.displayedWord[i] = new let(currentWord[i]);
+		this.displayedWord[i] = new letter(currentWord[i]);
 //		this.displayedWord[i] = currentWord[i];
 	}
 
@@ -16,13 +16,14 @@ function word(currentWord) {
 	// Checks if the letter guessed is in the current word
 	// and updates the word to display and displays it.
 	// Returns true if found, otherwise false
-	this.guessALetter = function(letter) {
-		console.log("Guess a letter");
+	this.hasLetter = function(letter) {
+		console.log("word.hasLetter()");
+		return false; // Hard Code for now to prevent infinite loop
 	}
 
 	this.log = function() {
-		console.log("Current Word: " + this.currentWord);
-		console.log("Displayed Word: ");
+		console.log("word.currentWord: " + this.currentWord);
+		console.log("word.displayedWord: ");
 		for (var i=0; i < this.displayedWord.length; i++) {
 			this.displayedWord[i].log();
 //			console.log(this.displayedWord);
@@ -30,5 +31,6 @@ function word(currentWord) {
 	}
 }
 
-var w = new word("WORD");
-w.log();
+module.exports = word;
+//var w = new word("WORD");
+//w.log();
