@@ -4,33 +4,79 @@ var letter = require('./letter.js');
 // the current word and the word to be displayed
 function word(currentWord) {
 	//attributes
-	this.currentWord = currentWord; // word to guess - may be a word object
-	this.displayedWord = new Array(currentWord.length); // something like '_ _ A _ _ L _'
+	this.currentWord = new Array(currentWord.length); // something like '_ _ A _ _ L _'
 
 	for (var i = 0; i < currentWord.length; i++){
-		this.displayedWord[i] = new letter(currentWord[i]);
-//		this.displayedWord[i] = currentWord[i];
+		this.currentWord[i] = new letter(currentWord[i]);
 	}
 
 	// methods
 	// Checks if the letter guessed is in the current word
 	// and updates the word to display and displays it.
-	// Returns true if found, otherwise false
+	// Returns a count of how many times the letter was found
 	this.hasLetter = function(letter) {
 		console.log("word.hasLetter()");
-		return false; // Hard Code for now to prevent infinite loop
+
+		var count = 0;
+
+		for (var i=0; i<this.currentWord.length; i++) {
+			if (this.currentWord[i].isEqual(letter)) {
+				count++;
+			}
+		}			
+
+		return count;
+	}
+
+	this.display = function() {
+		displayWord = "";
+		for(var i=0; i<this.currentWord.length; i++) {
+			displayWord += this.currentWord[i].charDisplayed;
+		}
+
+		console.log(displayWord);
 	}
 
 	this.log = function() {
-		console.log("word.currentWord: " + this.currentWord);
-		console.log("word.displayedWord: ");
-		for (var i=0; i < this.displayedWord.length; i++) {
-			this.displayedWord[i].log();
-//			console.log(this.displayedWord);
+		console.log("word.currentWord: ");
+		for (var i=0; i < this.currentWord.length; i++) {
+			this.currentWord[i].log();
 		}
 	}
 }
 
 module.exports = word;
-//var w = new word("WORD");
-//w.log();
+
+// Function for Testing the Word Object Indpendently from the game.
+function testWord() {
+	var testEntries = [
+		"12W45O78RD",	// Correct in 6 guesses
+		"123456R78901",	// Incorrect - only 1 correct letter
+		"112233445566WORD",	// Correct, test duplicate letters
+	];
+
+	var guessesAllowed = 10;
+
+	for (var i=0; i<testEntries.length; i++) {
+		var w = new word("WORD");
+		w.log();
+
+		var currEntry = testEntries[i];
+		var guessCount = 0;
+
+		// Check if any of the letters entered match
+		for (var j=0; j<currEntry.length && guessCount<guessesAllowed; j++) {
+			if (w.hasLetter(currEntry[j]) == 0) {
+				// Bad Guess, increase guessCount
+				guessCount++;
+			}
+		}
+
+		console.log("Test Guesses: " + currEntry);
+		console.log("Guess Count: " + guessCount);
+//		console.log("Correct Letter Count: " + correctCount);
+		console.log("Displayed Word: "); w.display();
+	}
+}
+
+testWord();
