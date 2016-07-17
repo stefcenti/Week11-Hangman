@@ -76,6 +76,7 @@ function game(guessesAllowed, debug=true) {
 			var count = self.word.hasLetter(letter);
 
 			self.word.display();
+			console.log(self.guessesSoFar);
 
 			// Do we have a match? If so, increase correct count
 			// If not, increase the number of guesses taken
