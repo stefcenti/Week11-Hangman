@@ -6,7 +6,9 @@
 //Start of Letter object code
 
 function letter(actualLetter, debug=true) {
-	//atributes
+	if (debug) { console.log("letter()"); }
+
+	//attributes
 	this.debug = debug;
 	this.letter = actualLetter;
 	this.charDisplayed = " _ "; // blank until correct
@@ -37,5 +39,3 @@ function letter(actualLetter, debug=true) {
 }
 
 module.exports = letter;
-//var l = new letter('W');
-//l.log();

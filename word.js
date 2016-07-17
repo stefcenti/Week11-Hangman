@@ -1,8 +1,15 @@
-var letter = require('./letter.js');
+/******
+/* Contains all of the methods which will check the letters 
+/* guessed versus the random word selected.var 
+/*/
+
+letter = require('./letter.js');
 
 //Given a word to guess, this will initialize
 // the current word and the word to be displayed
 function word(currentWord, debug=true) {
+	if (debug) { console.log("word()"); }
+
 	//attributes
 	this.debug = debug;
 	this.currentWord = new Array(currentWord.length); // something like '_ _ A _ _ L _'
@@ -31,9 +38,9 @@ function word(currentWord, debug=true) {
 	}
 
 	this.display = function() {
-		if (this.debug) { console.log("this.display()"); }
+		if (this.debug) { console.log("word.display()"); }
 
-		displayWord = "";
+		displayWord = "\n";
 		for(var i=0; i<this.length; i++) {
 			displayWord += this.currentWord[i].charDisplayed;
 		}
