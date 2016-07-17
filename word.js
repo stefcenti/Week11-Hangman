@@ -2,12 +2,14 @@ var letter = require('./letter.js');
 
 //Given a word to guess, this will initialize
 // the current word and the word to be displayed
-function word(currentWord) {
+function word(currentWord, debug=true) {
 	//attributes
+	this.debug = debug;
 	this.currentWord = new Array(currentWord.length); // something like '_ _ A _ _ L _'
+	this.length = currentWord.length;
 
-	for (var i = 0; i < currentWord.length; i++){
-		this.currentWord[i] = new letter(currentWord[i]);
+	for (var i = 0; i < this.length; i++){
+		this.currentWord[i] = new letter(currentWord[i], debug);
 	}
 
 	// methods
@@ -15,11 +17,11 @@ function word(currentWord) {
 	// and updates the word to display and displays it.
 	// Returns a count of how many times the letter was found
 	this.hasLetter = function(letter) {
-		console.log("word.hasLetter()");
+		if (this.debug) { console.log("word.hasLetter()") };
 
 		var count = 0;
 
-		for (var i=0; i<this.currentWord.length; i++) {
+		for (var i=0; i<this.length; i++) {
 			if (this.currentWord[i].isEqual(letter)) {
 				count++;
 			}
@@ -29,8 +31,10 @@ function word(currentWord) {
 	}
 
 	this.display = function() {
+		if (this.debug) { console.log("this.display()"); }
+
 		displayWord = "";
-		for(var i=0; i<this.currentWord.length; i++) {
+		for(var i=0; i<this.length; i++) {
 			displayWord += this.currentWord[i].charDisplayed;
 		}
 
@@ -39,7 +43,7 @@ function word(currentWord) {
 
 	this.log = function() {
 		console.log("word.currentWord: ");
-		for (var i=0; i < this.currentWord.length; i++) {
+		for (var i=0; i < this.length; i++) {
 			this.currentWord[i].log();
 		}
 	}
@@ -79,4 +83,4 @@ function testWord() {
 	}
 }
 
-testWord();
+//testWord();

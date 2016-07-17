@@ -25,5 +25,25 @@ Methods:
 			// new game, initialize it, and play until win/loss
 	getStats() // Display the current total wins/losses of all the games played.
 	quit() // Display the final stats, leave the game.
+/*/
+/*
+var inquirer = require('inquirer');
+var game = require('./game.js');
 
+function main(){
 
+	console.log("WELCOME TO SUPERHERO HANGMAN!!");
+
+	this.game = new game(10);
+
+   	inquirer.prompt([{
+	    type: 'input',
+	    message: 'ENTER A LETTER:',
+	    name: 'letter'
+    }]).then(function(input) {
+    	if (this.debug) { console.log("Then Function From Prompt") };
+
+    	game.play();
+    });	
+}
+*/

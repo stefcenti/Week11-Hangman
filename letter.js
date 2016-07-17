@@ -5,8 +5,9 @@
 
 //Start of Letter object code
 
-function letter(actualLetter) {
+function letter(actualLetter, debug=true) {
 	//atributes
+	this.debug = debug;
 	this.letter = actualLetter;
 	this.charDisplayed = " _ "; // blank until correct
 
@@ -15,7 +16,7 @@ function letter(actualLetter) {
 	// set the character displayed equal to the letter and
 	// return true.  Otherwise, leave the charDisplayed blank.
 	this.isEqual = function(charGuessed){
-		console.log("letter.isEqual()");
+		if (this.debug) { console.log("letter.isEqual()"); }
 
 		if (charGuessed === this.letter) {
 			this.charDisplayed = this.letter;
